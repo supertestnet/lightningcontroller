@@ -82,7 +82,7 @@ class LightningController
 
     // request a Lightning invoice from a LNBits wallet
     // take lnbits url, amount, memo, and lnbits api key as params, return generated invoice and payment hash
-    public function requestInvoice( $lnbits_url, $amount, $memo, $lnbits_apikey, $webhook )
+    public function requestInvoice( $lnbits_url, $amount, $memo, $lnbits_apikey, $webhook = "" )
 //    public function requestInvoice( $lnbits_url, $amount, $memo, $lnbits_apikey )
     {
         ob_start();
@@ -112,7 +112,7 @@ class LightningController
     public function checkInvoice( $lnbits_url, $pmthash, $lnbits_apikey )
     {
         ob_start();
-        $url = $lnbits_url . '/api/v1/payments';
+        $url = $lnbits_url . '/api/v1/payments/' . $pmthash;;
         $ch = curl_init();
         curl_setopt( $ch, CURLOPT_URL, $url );
         curl_setopt( $ch, CURLOPT_HTTPHEADER, array(
